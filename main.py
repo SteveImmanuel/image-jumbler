@@ -8,10 +8,11 @@ parser = argparse.ArgumentParser(description='Jumble all pixels in an image base
 required_args = parser.add_argument_group('required arguments')
 required_args.add_argument('-k', help='Encryption key', required=True)
 required_args.add_argument('-i', help='Input path', required=True)
-parser.add_argument('-m', help='Encrypt or decrypt, defaults to encrypt', choices=['encrypt', 'decrypt'], default='encrypt')
+parser.add_argument('-d', help='If presents, will decrypt instead of encrypt', action='store_true')
 parser.add_argument('-o', help='Output path (if ommited, result will be saved in curdir', required=False)
 
 args = parser.parse_args()
+
 key = args.k
 random.seed(key)
 
@@ -20,7 +21,7 @@ basename, ext = os.path.splitext(relative_path)
 in_abs_path = os.path.join(os.path.abspath('.'), relative_path)
 out_abs_path = args.o
 
-if args.m == 'encrypt':
+if not args.d:
     print('encrypting...')
     original_img = Image.open(in_abs_path)
 
