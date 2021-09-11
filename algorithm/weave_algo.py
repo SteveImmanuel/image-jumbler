@@ -27,7 +27,7 @@ class WeaveAlgo(BaseAlgo):
 
     def decrypt(self):
         super().decrypt()
-        print(self.img_arr.shape)
+
         for i in range(self.img_arr.shape[1] - 1, -1, -1):
             rand_num = self.generated_random_num.pop()
             self.img_arr[:, [i, rand_num]] = self.img_arr[:, [rand_num, i]]
